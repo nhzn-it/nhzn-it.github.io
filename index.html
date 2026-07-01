@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NHZN — Tech explorer · Full-stack wizard · AI dreamer</title>
+<meta name="description" content="Full-stack engineer and one-person software company. I design proprietary AI engines and ship multi-tenant SaaS — from empty repo to paying customers — solo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#080b09;color:#cdd8cf;font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+
+@keyframes nhzn-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes nhzn-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes nhzn-spin{to{transform:rotate(360deg)}}
+@keyframes nhzn-shimmer{0%{transform:translateX(-130%)}100%{transform:translateX(240%)}}
+@keyframes nhzn-sweep{0%{transform:translateX(-180px)}100%{transform:translateX(820px)}}
+@keyframes nhzn-glow{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes nhzn-pulse{0%{box-shadow:0 0 0 0 rgba(94,242,163,.5)}70%{box-shadow:0 0 0 6px rgba(94,242,163,0)}100%{box-shadow:0 0 0 0 rgba(94,242,163,0)}}
+@keyframes nhzn-fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+a{color:inherit;text-decoration:none}
+
+.nav-link{color:#8fb3a3;text-decoration:none;border-bottom:2px solid transparent;padding-bottom:2px;transition:color .15s,border-color .15s}
+.nav-link:hover{color:#cdefdb}
+.nav-link.active{color:#5ef2a3;border-bottom-color:#5ef2a3}
+
+.tcard:hover{border-color:#2f6b4b !important;background:#0e1712 !important;transform:translateY(-4px)}
+.tcard{transition:border-color .18s,background .18s,transform .18s}
+
+.skill-card{border:1px solid #16211b;border-radius:12px;background:#0b110e;padding:24px;transition:border-color .18s,background .18s}
+.skill-card:hover{border-color:#2f6b4b;background:#0e1712}
+
+.btn-primary{display:inline-flex;align-items:center;gap:8px;font:600 14px 'IBM Plex Mono';color:#0a1f14;background:#5ef2a3;padding:11px 20px;border-radius:8px;text-decoration:none;transition:background .15s,transform .15s}
+.btn-primary:hover{background:#7dffbb;transform:translateY(-2px)}
+
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;font:600 14px 'IBM Plex Mono';color:#cdefdb;border:1px solid #23402f;padding:11px 20px;border-radius:8px;text-decoration:none;transition:border-color .15s,color .15s}
+.btn-ghost:hover{border-color:#5ef2a3;color:#5ef2a3}
+
+.tech-tile{display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px 12px;border:1px solid #16211b;border-radius:12px;background:#0b110e;transition:border-color .18s,background .18s,transform .18s;cursor:default}
+.tech-tile:hover{border-color:#2f6b4b;background:#0e1712;transform:translateY(-4px)}
+
+.ai-card{display:flex;align-items:center;gap:12px;border:1px solid #16211b;background:#0b110e;border-radius:11px;padding:10px 15px 10px 11px;transition:border-color .18s,transform .18s}
+.ai-card:hover{border-color:#2f6b4b;transform:translateY(-2px)}
+
+.stat-card{border:1px solid #16211b;border-radius:12px;background:#0b110e;padding:22px 24px}
+
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+
+@media (prefers-reduced-motion:reduce){*{animation:none !important;scroll-behavior:auto !important;transition:none !important}}
+
+@media (max-width:700px){
+  .hero-flex{flex-direction:column !important}
+  .systems-grid{grid-template-columns:1fr !important}
+  .skills-grid{grid-template-columns:1fr !important}
+  .stats-grid{grid-template-columns:1fr 1fr !important}
+}
+</style>
+</head>
+<body>
+<div style="min-height:100vh;background:#080b09;background-image:linear-gradient(rgba(94,242,163,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(94,242,163,.022) 1px,transparent 1px);background-size:38px 38px">
+
+<!-- NAV -->
+<nav id="nav" style="position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:13px;flex-wrap:wrap;padding:12px 22px;background:rgba(9,13,11,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #16211b">
+  <span style="display:flex;gap:7px">
+    <span style="width:11px;height:11px;border-radius:50%;background:#ff5f56;display:inline-block"></span>
+    <span style="width:11px;height:11px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+    <span style="width:11px;height:11px;border-radius:50%;background:#27c93f;display:inline-block"></span>
+  </span>
+  <span style="font-size:12.5px;color:#5b6b61;letter-spacing:.02em">nhzn@github.io<span style="color:#37433d">:</span>~/portfolio</span>
+  <span style="flex:1"></span>
+  <div style="display:flex;gap:19px;font-size:13px">
+    <a href="#whoami" class="nav-link">whoami</a>
+    <a href="#ai" class="nav-link">ai</a>
+    <a href="#systems" class="nav-link">systems</a>
+    <a href="#languages" class="nav-link">languages</a>
+    <a href="#stack" class="nav-link">stack</a>
+    <a href="#activity" class="nav-link">activity</a>
+  </div>
+  <a href="https://github.com/nhzn-it" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#0a1f14;background:#5ef2a3;padding:6px 13px;border-radius:7px;text-decoration:none;transition:background .15s">★ github.com/nhzn-it</a>
+</nav>
+
+<!-- HERO -->
+<section id="whoami" style="max-width:1120px;margin:0 auto;padding:66px 24px 44px;scroll-margin-top:72px">
+  <div class="hero-flex" style="display:flex;gap:48px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1;min-width:320px">
+      <div style="font:500 14px/1.9 'IBM Plex Mono';margin:0 0 4px"><span style="color:#5ef2a3">visitor@nhzn</span><span style="color:#46594f">:~$</span> <span style="color:#eaf2ec">whoami</span></div>
+      <h1 style="margin:6px 0 8px;font:700 clamp(56px,8.5vw,108px)/.95 'IBM Plex Mono';letter-spacing:.04em;color:#5ef2a3;text-shadow:0 0 34px rgba(94,242,163,.4)">NHZN</h1>
+      <div style="font-size:14.5px;color:#7f968a;margin:0 0 22px">// tech explorer · full-stack wizard · AI dreamer</div>
+      <div style="font:500 14px/1.9 'IBM Plex Mono';margin:0 0 4px"><span style="color:#5ef2a3">visitor@nhzn</span><span style="color:#46594f">:~$</span> <span style="color:#eaf2ec">cat ~/.bio</span></div>
+      <p style="margin:2px 0 24px;font-family:'IBM Plex Sans',sans-serif;font-size:19px;line-height:1.55;color:#dfe9e1;max-width:560px">
+        Building, breaking, and <span style="color:#5ef2a3">re-imagining the future</span> — a one-person software company that turns frontier AI into autonomous, multi-tenant SaaS, shipped from empty repo to paying customers<span style="display:inline-block;width:9px;height:20px;background:#5ef2a3;margin-left:5px;vertical-align:-3px;animation:nhzn-blink 1.1s steps(1) infinite"></span>
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:9px;margin:0 0 28px">
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">[ AI engineer ]</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">[ solo founder ]</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">[ full-stack ]</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">[ sysadmin ]</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">[ security · GDPR ]</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#contact" class="btn-primary">./contact.sh</a>
+        <a href="#ai" class="btn-ghost">explore_ai →</a>
+      </div>
+    </div>
+    <!-- Spinning ring avatar -->
+    <div style="position:relative;width:158px;height:158px;flex:none">
+      <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#5ef2a3,#0b3d24 28%,#5ef2a3 52%,#0e4429 78%,#5ef2a3);animation:nhzn-spin 7s linear infinite;filter:drop-shadow(0 0 20px rgba(94,242,163,.38))"></div>
+      <div style="position:absolute;inset:5px;border-radius:50%;background:#0a0f0c;display:flex;align-items:center;justify-content:center;font:700 34px 'IBM Plex Mono';color:#5ef2a3;letter-spacing:.02em;text-shadow:0 0 20px rgba(94,242,163,.5)">NHZN</div>
+      <div style="position:absolute;bottom:8px;right:8px;width:20px;height:20px;border-radius:50%;background:#27c93f;border:3px solid #080b09;animation:nhzn-pulse 2.4s ease-out infinite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div style="position:relative;overflow:hidden;border-top:1px solid #16211b;border-bottom:1px solid #16211b;background:#0a100d;padding:22px 0">
+  <div id="marquee" style="display:flex;width:max-content;animation:nhzn-marquee 42s linear infinite"></div>
+  <div style="position:absolute;left:0;top:0;bottom:0;width:130px;background:linear-gradient(90deg,#0a100d,transparent);pointer-events:none"></div>
+  <div style="position:absolute;right:0;top:0;bottom:0;width:130px;background:linear-gradient(270deg,#0a100d,transparent);pointer-events:none"></div>
+</div>
+
+<!-- AI SECTION -->
+<section id="ai" style="max-width:1120px;margin:0 auto;padding:58px 24px;scroll-margin-top:72px">
+  <div style="margin:0 0 30px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">./run-agent.sh</span></div>
+    <h2 style="margin:10px 0 4px;font:700 clamp(28px,3.2vw,36px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em"># AI engineering</h2>
+    <p style="margin:0;font-family:'IBM Plex Sans',sans-serif;font-size:15.5px;color:#7f968a">Where I spend most of my energy — turning frontier models into reliable, autonomous products.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:36px;align-items:center">
+    <div>
+      <p style="margin:0 0 22px;font-family:'IBM Plex Sans',sans-serif;font-size:16.5px;line-height:1.62;color:#dfe9e1">I design and ship <span style="color:#5ef2a3">agentic AI systems</span> — prompt pipelines, tool-using agents and self-correcting loops that automate real work end-to-end. The proprietary conversational and scoring engines behind my SaaS run on this every day.</p>
+      <div style="font:500 12.5px 'IBM Plex Mono';color:#5b7d6b;margin:0 0 12px"># models I build on</div>
+      <div style="display:flex;flex-wrap:wrap;gap:11px;margin:0 0 26px">
+        <div class="ai-card">
+          <span style="width:34px;height:34px;border-radius:8px;background:#f2f7ff;display:inline-flex;align-items:center;justify-content:center;flex:none">
+            <img src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/claude-color.svg" alt="Claude" width="22" height="22" style="object-fit:contain" onerror="this.src='https://cdn.simpleicons.org/anthropic/000000';this.onerror=null">
+          </span>
+          <div>
+            <div style="font:600 14px 'IBM Plex Mono';color:#eaf2ec">Claude</div>
+            <div style="font:400 11px 'IBM Plex Mono';color:#6f8a7d">Anthropic · agents</div>
+          </div>
+        </div>
+        <div class="ai-card">
+          <span style="width:34px;height:34px;border-radius:8px;background:#f2f7ff;display:inline-flex;align-items:center;justify-content:center;flex:none">
+            <img src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/openai.svg" alt="OpenAI" width="22" height="22" style="object-fit:contain" onerror="this.src='https://cdn.simpleicons.org/openai/000000';this.onerror=null">
+          </span>
+          <div>
+            <div style="font:600 14px 'IBM Plex Mono';color:#eaf2ec">OpenAI</div>
+            <div style="font:400 11px 'IBM Plex Mono';color:#6f8a7d">GPT · realtime</div>
+          </div>
+        </div>
+        <div class="ai-card">
+          <span style="width:34px;height:34px;border-radius:8px;background:#f2f7ff;display:inline-flex;align-items:center;justify-content:center;flex:none">
+            <img src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/gemini-color.svg" alt="Gemini" width="22" height="22" style="object-fit:contain" onerror="this.src='https://cdn.simpleicons.org/googlegemini/000000';this.onerror=null">
+          </span>
+          <div>
+            <div style="font:600 14px 'IBM Plex Mono';color:#eaf2ec">Gemini</div>
+            <div style="font:400 11px 'IBM Plex Mono';color:#6f8a7d">2.5 · multimodal</div>
+          </div>
+        </div>
+        <div class="ai-card">
+          <span style="width:34px;height:34px;border-radius:8px;background:#f2f7ff;display:inline-flex;align-items:center;justify-content:center;flex:none">
+            <img src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/openrouter.svg" alt="OpenRouter" width="22" height="22" style="object-fit:contain" onerror="this.style.display='none';this.onerror=null">
+          </span>
+          <div>
+            <div style="font:600 14px 'IBM Plex Mono';color:#eaf2ec">OpenRouter</div>
+            <div style="font:400 11px 'IBM Plex Mono';color:#6f8a7d">multi-model routing</div>
+          </div>
+        </div>
+      </div>
+      <div style="font:500 12.5px 'IBM Plex Mono';color:#5b7d6b;margin:0 0 12px"># capabilities</div>
+      <div style="display:flex;flex-wrap:wrap;gap:9px">
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Prompt engineering</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Agentic workflows</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Automation loops</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Tool use &amp; function calling</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Structured output + JSON repair</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Multimodal (audio · image · PDF)</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">RAG &amp; context design</span>
+        <span style="font:500 12.5px 'IBM Plex Mono';color:#9fe9c4;border:1px solid #23402f;background:#0e1813;padding:5px 12px;border-radius:6px">Evals &amp; guardrails</span>
+      </div>
+    </div>
+    <!-- Agent loop diagram -->
+    <div style="display:flex;justify-content:center;align-items:center">
+      <div style="position:relative;width:300px;height:300px;flex:none">
+        <div style="position:absolute;top:50%;left:50%;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(94,242,163,.16),transparent 42%);animation:nhzn-spin 8s linear infinite"></div>
+        <div style="position:absolute;top:50%;left:50%;width:230px;height:230px;margin:-115px 0 0 -115px;border-radius:50%;border:1.5px dashed #23402f"></div>
+        <div style="position:absolute;top:50%;left:50%;width:230px;height:230px;margin:-115px 0 0 -115px;animation:nhzn-spin 5s linear infinite">
+          <div style="position:absolute;top:-7px;left:50%;margin-left:-7px;width:14px;height:14px;border-radius:50%;background:#5ef2a3;box-shadow:0 0 14px 3px rgba(94,242,163,.7)"></div>
+        </div>
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+          <div style="font:700 15px 'IBM Plex Mono';color:#5ef2a3;letter-spacing:.12em">AGENT</div>
+          <div style="font:500 11px 'IBM Plex Mono';color:#6f8a7d;margin-top:2px">loop ∞</div>
+        </div>
+        <span style="position:absolute;top:34px;left:150px;transform:translate(-50%,-50%);font:600 11px 'IBM Plex Mono';color:#cdefdb;background:#0e1712;border:1px solid #23402f;padding:5px 10px;border-radius:6px;white-space:nowrap">1 · PROMPT</span>
+        <span style="position:absolute;top:150px;left:266px;transform:translate(-50%,-50%);font:600 11px 'IBM Plex Mono';color:#cdefdb;background:#0e1712;border:1px solid #23402f;padding:5px 10px;border-radius:6px;white-space:nowrap">2 · PLAN</span>
+        <span style="position:absolute;top:266px;left:150px;transform:translate(-50%,-50%);font:600 11px 'IBM Plex Mono';color:#cdefdb;background:#0e1712;border:1px solid #23402f;padding:5px 10px;border-radius:6px;white-space:nowrap">3 · ACT</span>
+        <span style="position:absolute;top:150px;left:34px;transform:translate(-50%,-50%);font:600 11px 'IBM Plex Mono';color:#cdefdb;background:#0e1712;border:1px solid #23402f;padding:5px 10px;border-radius:6px;white-space:nowrap">4 · OBSERVE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEMS -->
+<section id="systems" style="max-width:1120px;margin:0 auto;padding:44px 24px 58px;scroll-margin-top:72px">
+  <div style="margin:0 0 30px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">uptime &amp;&amp; systemctl status</span></div>
+    <h2 style="margin:10px 0 4px;font:700 clamp(28px,3.2vw,36px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em"># Systems &amp; infrastructure</h2>
+    <p style="margin:0;font-family:'IBM Plex Sans',sans-serif;font-size:15.5px;line-height:1.55;color:#7f968a;max-width:680px">Full-stack dev, applied AI, and the infrastructure beneath it — three trades in one engineer. I don't just ship the app, I run the metal under it. <span style="color:#9fbfae">That combination is rare.</span></p>
+  </div>
+  <div class="systems-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:36px;align-items:start">
+    <div>
+      <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #16211b">
+        <div style="flex:none;width:104px;font:600 12.5px 'IBM Plex Mono';color:#5ef2a3;padding-top:1px">OS</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#c3cfc6">Windows Server <span style="color:#7f968a">— Active Directory · GPO · DNS/DHCP · Hyper-V</span><br>Linux <span style="color:#7f968a">— Debian/Ubuntu · systemd · bash · hardening</span></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #16211b">
+        <div style="flex:none;width:104px;font:600 12.5px 'IBM Plex Mono';color:#5ef2a3;padding-top:1px">Virtualization</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#c3cfc6">Proxmox VE · VMware ESXi · Hyper-V <span style="color:#7f968a">— VMs &amp; LXC containers, snapshots, migration</span></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #16211b">
+        <div style="flex:none;width:104px;font:600 12.5px 'IBM Plex Mono';color:#5ef2a3;padding-top:1px">Storage / NAS</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#c3cfc6">Synology DSM · RAID <span style="color:#7f968a">— shares, snapshots, 3-2-1 backup strategy</span></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #16211b">
+        <div style="flex:none;width:104px;font:600 12.5px 'IBM Plex Mono';color:#5ef2a3;padding-top:1px">Network</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#c3cfc6">VLANs · firewalls · reverse proxy (Nginx/Traefik) <span style="color:#7f968a">· WireGuard VPN</span></div>
+      </div>
+      <div style="display:flex;gap:16px;padding:14px 0;border-top:1px solid #16211b;border-bottom:1px solid #16211b">
+        <div style="flex:none;width:104px;font:600 12.5px 'IBM Plex Mono';color:#5ef2a3;padding-top:1px">Ops</div>
+        <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;line-height:1.5;color:#c3cfc6">Self-hosting · Docker · monitoring · cron <span style="color:#7f968a">— backups &amp; hardening</span></div>
+      </div>
+    </div>
+    <!-- Fleet status -->
+    <div style="border:1px solid #16211b;border-radius:12px;background:#0b110e;overflow:hidden">
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;background:#0e1411;border-bottom:1px solid #16211b">
+        <span style="display:flex;gap:6px"><span style="width:9px;height:9px;border-radius:50%;background:#ff5f56;display:inline-block"></span><span style="width:9px;height:9px;border-radius:50%;background:#ffbd2e;display:inline-block"></span><span style="width:9px;height:9px;border-radius:50%;background:#27c93f;display:inline-block"></span></span>
+        <span style="flex:1;font:500 12px 'IBM Plex Mono';color:#5b6b61">~/infra/fleet</span>
+        <span style="font:500 11px 'IBM Plex Mono';color:#5b7d6b">4 hosts</span>
+      </div>
+      <div style="padding:6px 18px 10px">
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #101a15">
+          <span style="width:9px;height:9px;border-radius:50%;flex:none;background:#39d353;box-shadow:0 0 8px rgba(57,211,83,.6);animation:nhzn-glow 2s ease-in-out infinite"></span>
+          <span style="font:600 13px 'IBM Plex Mono';color:#dfe9e1;min-width:120px">win-srv-01</span>
+          <span style="font:500 10.5px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:2px 8px;border-radius:5px">Windows</span>
+          <span style="flex:1"></span>
+          <span style="display:flex;gap:3px"><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #101a15">
+          <span style="width:9px;height:9px;border-radius:50%;flex:none;background:#39d353;box-shadow:0 0 8px rgba(57,211,83,.6);animation:nhzn-glow 2s ease-in-out infinite;animation-delay:.4s"></span>
+          <span style="font:600 13px 'IBM Plex Mono';color:#dfe9e1;min-width:120px">debian-01</span>
+          <span style="font:500 10.5px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:2px 8px;border-radius:5px">Linux</span>
+          <span style="flex:1"></span>
+          <span style="display:flex;gap:3px"><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #101a15">
+          <span style="width:9px;height:9px;border-radius:50%;flex:none;background:#39d353;box-shadow:0 0 8px rgba(57,211,83,.6);animation:nhzn-glow 2s ease-in-out infinite;animation-delay:.8s"></span>
+          <span style="font:600 13px 'IBM Plex Mono';color:#dfe9e1;min-width:120px">synology-nas</span>
+          <span style="font:500 10.5px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:2px 8px;border-radius:5px">DSM</span>
+          <span style="flex:1"></span>
+          <span style="display:flex;gap:3px"><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #101a15">
+          <span style="width:9px;height:9px;border-radius:50%;flex:none;background:#39d353;box-shadow:0 0 8px rgba(57,211,83,.6);animation:nhzn-glow 2s ease-in-out infinite;animation-delay:1.2s"></span>
+          <span style="font:600 13px 'IBM Plex Mono';color:#dfe9e1;min-width:120px">proxmox-node</span>
+          <span style="font:500 10.5px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:2px 8px;border-radius:5px">Proxmox</span>
+          <span style="flex:1"></span>
+          <span style="display:flex;gap:3px"><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#26a641;display:inline-block"></span><span style="width:6px;height:13px;border-radius:2px;background:#15251c;display:inline-block"></span></span>
+        </div>
+      </div>
+      <div style="padding:12px 18px;border-top:1px solid #16211b;font:500 12px 'IBM Plex Mono';color:#5b7d6b"><span style="color:#39d353">●</span> all systems operational · uptime 99.9%</div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages" style="max-width:1120px;margin:0 auto;padding:44px 24px 58px;scroll-margin-top:72px">
+  <div style="margin:0 0 26px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">cat languages.json</span></div>
+    <h2 style="margin:10px 0 4px;font:700 clamp(28px,3.2vw,36px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em"># Language mix</h2>
+    <p style="margin:0;font-family:'IBM Plex Sans',sans-serif;font-size:15.5px;color:#7f968a">The languages I reach for, roughly weighted by how much I actually ship in them.</p>
+  </div>
+  <div style="position:relative;height:18px;border-radius:9px;overflow:hidden;display:flex;background:#0e1611;border:1px solid #16211b">
+    <div style="width:34%;background:#3178c6"></div>
+    <div style="width:21%;background:#4b8bbe"></div>
+    <div style="width:17%;background:#f1e05a"></div>
+    <div style="width:13%;background:#b07219"></div>
+    <div style="width:9%;background:#e34c26"></div>
+    <div style="width:6%;background:#89e051"></div>
+    <div style="position:absolute;top:0;bottom:0;left:0;width:38%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);animation:nhzn-shimmer 3.4s linear infinite;pointer-events:none"></div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px 30px;margin:20px 0 0">
+    <div style="display:flex;align-items:center;gap:9px;font:500 13.5px 'IBM Plex Mono';color:#b9c7bd"><span style="width:11px;height:11px;border-radius:50%;background:#3178c6;display:inline-block"></span>TypeScript <span style="color:#5b7d6b">34%</span></div>
+    <div style="display:flex;align-items:center;gap:9px;font:500 13.5px 'IBM Plex Mono';color:#b9c7bd"><span style="width:11px;height:11px;border-radius:50%;background:#4b8bbe;display:inline-block"></span>Python <span style="color:#5b7d6b">21%</span></div>
+    <div style="display:flex;align-items:center;gap:9px;font:500 13.5px 'IBM Plex Mono';color:#b9c7bd"><span style="width:11px;height:11px;border-radius:50%;background:#f1e05a;display:inline-block"></span>JavaScript <span style="color:#5b7d6b">17%</span></div>
+    <div style="display:flex;align-items:center;gap:9px;font:500 13.5px 'IBM Plex Mono';color:#b9c7bd"><span style="width:11px;height:11px;border-radius:50%;background:#b07219;display:inline-block"></span>Java <span style="color:#5b7d6b">13%</span></div>
+    <div style="display:flex;align-items:center;gap:9px;font:500 13.5px 'IBM Plex Mono';color:#b9c7bd"><span style="width:11px;height:11px;border-radius:50%;background:#e34c26;display:inline-block"></span>HTML/CSS <span style="color:#5b7d6b">9%</span></div>
+    <div style="display:flex;align-items:center;gap:9px;font:500 13.5px 'IBM Plex Mono';color:#b9c7bd"><span style="width:11px;height:11px;border-radius:50%;background:#89e051;display:inline-block"></span>Shell <span style="color:#5b7d6b">6%</span></div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack" style="max-width:1120px;margin:0 auto;padding:14px 24px 58px;scroll-margin-top:72px">
+  <div style="margin:0 0 26px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">ls ~/stack</span></div>
+    <h2 style="margin:10px 0 4px;font:700 clamp(28px,3.2vw,36px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em"># Tools &amp; frameworks</h2>
+    <p style="margin:0;font-family:'IBM Plex Sans',sans-serif;font-size:15.5px;color:#7f968a">The day-to-day kit behind the products I build.</p>
+  </div>
+  <div id="tech-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px"></div>
+  <div style="margin:22px 0 0">
+    <div style="font:500 12.5px 'IBM Plex Mono';color:#5b7d6b;margin:0 0 11px"># also in the toolbox</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Next.js</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Prisma</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">TanStack Query</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Zod</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Vitest</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Playwright</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Redis</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Firecrawl</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Vercel</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Railway</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Nginx</span>
+      <span style="font:500 12px 'IBM Plex Mono';color:#8fb3a3;border:1px solid #1d2a23;padding:4px 11px;border-radius:5px">Sentry</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="max-width:1120px;margin:0 auto;padding:14px 24px 58px;scroll-margin-top:72px">
+  <div style="margin:0 0 26px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">cat skills.md</span></div>
+    <h2 style="margin:10px 0 4px;font:700 clamp(28px,3.2vw,36px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em"># What I actually do</h2>
+    <p style="margin:0;font-family:'IBM Plex Sans',sans-serif;font-size:15.5px;color:#7f968a">Fifteen years of shipping, distilled into what I bring to a codebase.</p>
+  </div>
+  <div class="skills-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+    <div class="skill-card">
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 15px"><span style="color:#5ef2a3">▸</span><h3 style="margin:0;font:700 16px 'IBM Plex Mono';color:#eaf2ec">Applied AI &amp; agents</h3></div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#b9c7bd">
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Proprietary conversational &amp; scoring engines</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Agentic loops, tool use &amp; automations</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Claude · OpenAI · Gemini · prompt engineering</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 15px"><span style="color:#5ef2a3">▸</span><h3 style="margin:0;font:700 16px 'IBM Plex Mono';color:#eaf2ec">Backend architecture</h3></div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#b9c7bd">
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Multi-tenant SaaS with isolation by default</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>AdonisJS · Node.js · ~200 REST endpoints</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Prisma · PostgreSQL · SSE realtime</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 15px"><span style="color:#5ef2a3">▸</span><h3 style="margin:0;font:700 16px 'IBM Plex Mono';color:#eaf2ec">Frontend engineering</h3></div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#b9c7bd">
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>React · Next.js · TanStack Query</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Tailwind · shadcn/ui · design systems</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Type-safe forms with Zod validation</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 15px"><span style="color:#5ef2a3">▸</span><h3 style="margin:0;font:700 16px 'IBM Plex Mono';color:#eaf2ec">DevOps &amp; infra</h3></div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#b9c7bd">
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Docker multi-stage · CI/CD pipelines</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Railway · Vercel · Supabase (EU region)</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Self-hosted services · observability</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 15px"><span style="color:#5ef2a3">▸</span><h3 style="margin:0;font:700 16px 'IBM Plex Mono';color:#eaf2ec">Security &amp; compliance</h3></div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#b9c7bd">
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>AES-256-GCM at rest · TOTP 2FA</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>HMAC webhooks · SSRF guards · rotating tokens</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>GDPR for health data (Art. 9)</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 15px"><span style="color:#5ef2a3">▸</span><h3 style="margin:0;font:700 16px 'IBM Plex Mono';color:#eaf2ec">Quality &amp; testing</h3></div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#b9c7bd">
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Strict TDD — red → green → ship</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>~1300 tests · Vitest · Playwright · JAPA</li>
+        <li><span style="color:#5ef2a3;margin-right:8px">✓</span>Solo delivery: repo → prod → paying users</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITY -->
+<section id="activity" style="max-width:1120px;margin:0 auto;padding:14px 24px 58px;scroll-margin-top:72px">
+  <div style="margin:0 0 26px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">git log --graph --all</span></div>
+    <h2 style="margin:10px 0 4px;font:700 clamp(28px,3.2vw,36px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em"># Always building</h2>
+    <p style="margin:0;font-family:'IBM Plex Sans',sans-serif;font-size:15.5px;color:#7f968a">A steady rhythm of commits — nights, weekends, and everything shipped solo.</p>
+  </div>
+  <div style="position:relative;overflow:hidden;border:1px solid #16211b;border-radius:12px;background:#0b110e;padding:24px">
+    <div style="font:600 14.5px 'IBM Plex Mono';color:#cdd8cf;margin:0 0 18px"><span id="contrib-total" style="color:#5ef2a3">—</span> contributions in the last year</div>
+    <div style="overflow-x:auto;padding-bottom:6px"><div id="contrib-graph"></div></div>
+    <div style="position:absolute;top:0;bottom:0;left:0;width:150px;background:linear-gradient(90deg,transparent,rgba(94,242,163,.14),transparent);animation:nhzn-sweep 5s linear infinite;pointer-events:none"></div>
+    <div style="display:flex;align-items:center;gap:6px;justify-content:flex-end;margin:16px 0 0;font:500 11.5px 'IBM Plex Mono';color:#5b7d6b">
+      Less
+      <span style="width:11px;height:11px;border-radius:2px;background:#15251c;display:inline-block"></span>
+      <span style="width:11px;height:11px;border-radius:2px;background:#0e4429;display:inline-block"></span>
+      <span style="width:11px;height:11px;border-radius:2px;background:#006d32;display:inline-block"></span>
+      <span style="width:11px;height:11px;border-radius:2px;background:#26a641;display:inline-block"></span>
+      <span style="width:11px;height:11px;border-radius:2px;background:#39d353;display:inline-block"></span>
+      More
+    </div>
+  </div>
+  <div class="stats-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin:16px 0 0">
+    <div class="stat-card">
+      <div style="font:700 34px 'IBM Plex Mono';color:#5ef2a3;line-height:1">15+</div>
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#8fb3a3;margin-top:6px">years shipping software</div>
+    </div>
+    <div class="stat-card">
+      <div style="font:700 34px 'IBM Plex Mono';color:#5ef2a3;line-height:1">solo</div>
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#8fb3a3;margin-top:6px">design → build → production</div>
+    </div>
+    <div class="stat-card">
+      <div style="font:700 34px 'IBM Plex Mono';color:#5ef2a3;line-height:1">TDD</div>
+      <div style="font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#8fb3a3;margin-top:6px">~1300 tests behind the work</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:1120px;margin:0 auto;padding:24px 24px 20px;scroll-margin-top:72px">
+  <div style="border:1px solid #16211b;border-radius:14px;background:linear-gradient(160deg,#0c1410,#0a0f0c);padding:44px 40px">
+    <div style="font:500 13px 'IBM Plex Mono';color:#6f8a7d;margin:0 0 8px"><span style="color:#5ef2a3">visitor@nhzn</span>:~$ <span style="color:#eaf2ec">./contact.sh</span></div>
+    <h2 style="margin:0 0 22px;font:700 clamp(30px,3.6vw,42px) 'IBM Plex Mono';color:#eaf2ec;letter-spacing:-.01em">Let's build something.</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="https://npb-it.com" target="_blank" rel="noopener" class="btn-primary">↗ npb-it.com</a>
+      <a href="mailto:contact@npb-it.com" class="btn-ghost">✉ contact@npb-it.com</a>
+      <a href="https://github.com/nhzn-it" target="_blank" rel="noopener" class="btn-ghost">★ github.com/nhzn-it</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div style="max-width:1120px;margin:0 auto;padding:22px 24px 48px;font:400 12px 'IBM Plex Mono';color:#37433d">
+  © 2026 nhzn · NPB-IT — built solo, like everything else<span style="display:inline-block;width:8px;height:14px;background:#37433d;margin-left:6px;vertical-align:-2px;animation:nhzn-blink 1.1s steps(1) infinite"></span>
+</div>
+
+</div>
+
+<script>
+(function(){
+  // ── Tech tiles + marquee ──────────────────────────────────────────────────
+  const base = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/';
+  const techs = [
+    { name:'TypeScript', slug:'typescript', icon:'typescript-original.svg', si:'typescript' },
+    { name:'JavaScript', slug:'javascript', icon:'javascript-original.svg', si:'javascript' },
+    { name:'Python',     slug:'python',     icon:'python-original.svg',     si:'python' },
+    { name:'Java',       slug:'java',       icon:'java-original.svg',       si:'' },
+    { name:'AdonisJS',   slug:'adonisjs',   icon:'adonisjs-original.svg',   si:'adonisjs' },
+    { name:'React',      slug:'react',      icon:'react-original.svg',      si:'react' },
+    { name:'Node.js',    slug:'nodejs',     icon:'nodejs-original.svg',     si:'nodedotjs' },
+    { name:'PostgreSQL', slug:'postgresql', icon:'postgresql-original.svg', si:'postgresql' },
+    { name:'Docker',     slug:'docker',     icon:'docker-original.svg',     si:'docker' },
+    { name:'Tailwind',   slug:'tailwindcss',icon:'tailwindcss-original.svg',si:'tailwindcss' },
+    { name:'Supabase',   slug:'supabase',   icon:'supabase-original.svg',   si:'supabase' },
+    { name:'Git',        slug:'git',        icon:'git-original.svg',        si:'git' }
+  ];
+
+  function imgFallback(img, si) {
+    if (si && img.src.indexOf('simpleicons') === -1) {
+      img.src = 'https://cdn.simpleicons.org/' + si;
+    } else {
+      img.style.opacity = '0.28';
+    }
+  }
+
+  // Tech grid
+  const grid = document.getElementById('tech-grid');
+  techs.forEach(function(t) {
+    var div = document.createElement('div');
+    div.className = 'tech-tile';
+    var img = document.createElement('img');
+    img.src = base + t.slug + '/' + t.icon;
+    img.alt = t.name;
+    img.width = 42; img.height = 42;
+    img.style.objectFit = 'contain';
+    img.addEventListener('error', function() { imgFallback(this, t.si); });
+    var span = document.createElement('span');
+    span.style.cssText = "font:500 13px 'IBM Plex Mono';color:#cdd8cf";
+    span.textContent = t.name;
+    div.appendChild(img);
+    div.appendChild(span);
+    grid.appendChild(div);
+  });
+
+  // Marquee — duplicate for seamless loop
+  var marquee = document.getElementById('marquee');
+  var all = techs.concat(techs);
+  all.forEach(function(t, i) {
+    var item = document.createElement('div');
+    item.style.cssText = 'display:flex;align-items:center;gap:11px;margin-right:50px;flex:none';
+    var img = document.createElement('img');
+    img.src = base + t.slug + '/' + t.icon;
+    img.alt = t.name;
+    img.width = 30; img.height = 30;
+    img.style.objectFit = 'contain';
+    img.addEventListener('error', function() { imgFallback(this, t.si); });
+    var span = document.createElement('span');
+    span.style.cssText = "font:500 15px 'IBM Plex Mono';color:#8fb3a3";
+    span.textContent = t.name;
+    item.appendChild(img);
+    item.appendChild(span);
+    marquee.appendChild(item);
+  });
+
+  // ── Contribution graph ────────────────────────────────────────────────────
+  var WEEKS = 52, DAYS = 7;
+  var seed = 20240517;
+  function rand() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 4294967296;
+  }
+  var density = 0.42;
+  var colors = ['#15251c','#0e4429','#006d32','#26a641','#39d353'];
+  var countRamp = [0,2,4,7,11];
+  var empty = 1 - density;
+
+  function levelOf(v) {
+    if (v < empty) return 0;
+    var t = (v - empty) / (1 - empty);
+    return t > 0.82 ? 4 : t > 0.6 ? 3 : t > 0.32 ? 2 : 1;
+  }
+
+  var monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var today = new Date();
+  var total = 0;
+  var rawGrid = [];
+
+  for (var w = 0; w < WEEKS; w++) {
+    var col = [];
+    for (var d = 0; d < DAYS; d++) col.push(rand());
+    rawGrid.push(col);
+  }
+
+  // Build wrapper
+  var wrapper = document.createElement('div');
+  wrapper.style.cssText = 'display:inline-flex;flex-direction:column;gap:5px';
+
+  // Month row
+  var monthRow = document.createElement('div');
+  monthRow.style.cssText = 'display:flex;height:13px';
+
+  var lastM = -1;
+  rawGrid.forEach(function(col, w) {
+    var dt = new Date(today);
+    dt.setDate(dt.getDate() - (WEEKS - 1 - w) * 7);
+    var m = dt.getMonth();
+    var cell = document.createElement('div');
+    cell.style.cssText = "width:15px;font-size:10px;line-height:13px;color:#5b7d6b;font-family:'IBM Plex Mono',monospace;white-space:nowrap;overflow:visible";
+    cell.textContent = m !== lastM ? monthNames[m] : '';
+    lastM = m;
+    monthRow.appendChild(cell);
+  });
+
+  // Day labels + grid row
+  var gridRow = document.createElement('div');
+  gridRow.style.cssText = 'display:flex';
+
+  var dayLabels = document.createElement('div');
+  dayLabels.style.cssText = 'display:flex;flex-direction:column;gap:3px;width:30px;flex:none';
+  ['','Mon','','Wed','','Fri',''].forEach(function(lab) {
+    var el = document.createElement('div');
+    el.style.cssText = "height:12px;line-height:12px;font-size:9px;text-align:right;padding-right:6px;color:#5b7d6b;font-family:'IBM Plex Mono',monospace";
+    el.textContent = lab;
+    dayLabels.appendChild(el);
+  });
+
+  var weeksEl = document.createElement('div');
+  weeksEl.style.cssText = 'display:flex;gap:3px';
+
+  rawGrid.forEach(function(col, w) {
+    var colEl = document.createElement('div');
+    colEl.style.cssText = 'display:flex;flex-direction:column;gap:3px';
+    col.forEach(function(v, d) {
+      var lv = levelOf(v);
+      total += countRamp[lv];
+      var daysAgo = (WEEKS - 1 - w) * 7 + (6 - d);
+      var dt = new Date(today);
+      dt.setDate(dt.getDate() - daysAgo);
+      var label = (countRamp[lv] === 0 ? 'No contributions' : countRamp[lv] + ' contributions') +
+        ' on ' + monthNames[dt.getMonth()] + ' ' + dt.getDate();
+      var cell = document.createElement('div');
+      cell.title = label;
+      cell.style.cssText = 'width:12px;height:12px;border-radius:2px;flex:none;background:' + colors[lv] +
+        (lv >= 3 ? ';box-shadow:0 0 6px ' + colors[4] + '80' : '');
+      colEl.appendChild(cell);
+    });
+    weeksEl.appendChild(colEl);
+  });
+
+  gridRow.appendChild(dayLabels);
+  gridRow.appendChild(weeksEl);
+
+  var headerRow = document.createElement('div');
+  headerRow.style.cssText = 'display:flex';
+  var spacer = document.createElement('div');
+  spacer.style.cssText = 'width:30px;flex:none';
+  headerRow.appendChild(spacer);
+  headerRow.appendChild(monthRow);
+
+  wrapper.appendChild(headerRow);
+  wrapper.appendChild(gridRow);
+
+  document.getElementById('contrib-graph').appendChild(wrapper);
+  document.getElementById('contrib-total').textContent = total.toLocaleString('en-US');
+
+  // ── Scroll spy nav ────────────────────────────────────────────────────────
+  var navLinks = document.querySelectorAll('a.nav-link');
+  var sections = [];
+  navLinks.forEach(function(a) {
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ a: a, el: el });
+  });
+
+  var activeLink = null;
+  function setActive(a) {
+    if (a === activeLink) return;
+    navLinks.forEach(function(l) { l.classList.remove('active'); });
+    a.classList.add('active');
+    activeLink = a;
+  }
+
+  function updateSpy() {
+    var line = window.innerHeight * 0.35;
+    var current = sections[0] && sections[0].a;
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].el.getBoundingClientRect().top <= line) current = sections[i].a;
+    }
+    if (current) setActive(current);
+  }
+
+  window.addEventListener('scroll', updateSpy, { passive: true });
+  window.addEventListener('resize', updateSpy);
+  setInterval(updateSpy, 250);
+  updateSpy();
+})();
+</script>
+</body>
+</html>
